@@ -1,0 +1,110 @@
+:root {
+  --paper: #fdf9f8;
+  --ink: #111;
+  --font-display: 'Chelsea Market', 'Mada', sans-serif;
+  --font-body: 'Mada', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--ink); background: var(--paper); }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: fixed; inset: 0 0 auto 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.35rem 1rem;
+  background: rgba(60, 60, 60, 0.55);
+  backdrop-filter: blur(4px);
+  color: #fff; font-size: 0.8rem;
+}
+.navbar__links { display: flex; align-items: center; gap: 1rem; }
+.navbar__links a:hover { text-decoration: underline; }
+.navbar__cta {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 0.3rem 1rem; border-radius: 3px;
+}
+.navbar__cta:hover { background: rgba(255, 255, 255, 0.4); text-decoration: none !important; }
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 460px; height: 62vh;
+  background-size: cover; background-position: center;
+  display: flex; justify-content: center; padding-top: 4.5rem;
+}
+.hero__title {
+  font-family: var(--font-display); font-weight: 400;
+  color: #fff; text-align: center;
+  font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.25;
+  max-width: 7ch; height: fit-content;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- Albums ---------- */
+/* Positions are percentages of the design frame (485 x 280) so the
+   staggered layout scales smoothly from phone to desktop. */
+.albums { background: var(--paper); padding: 3rem 0 4rem; }
+.albums__stack {
+  position: relative; container-type: inline-size;
+  width: min(800px, 100%); aspect-ratio: 485 / 280; margin: 0 auto;
+}
+.album { position: absolute; }
+.album__img {
+  width: 100%; height: 100%; object-fit: cover;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  transition: transform 0.25s ease;
+}
+.album:hover { z-index: 5; }
+.album:hover .album__img { transform: scale(1.04); }
+.album__title {
+  position: absolute; white-space: nowrap;
+  font-family: var(--font-display); font-size: 3.1cqw;
+}
+.album--1 { left: 7.6%;  top: 0;     width: 21%;   aspect-ratio: 1 / 1.12; }
+.album--2 { left: 25.2%; top: 22%;   width: 20.2%; aspect-ratio: 1 / 1.45; }
+.album--3 { left: 41.4%; top: 47.8%; width: 21%;   aspect-ratio: 1 / 1.3; }
+.album--1 .album__title { left: 165%; top: 25%; }
+.album--2 .album__title { left: 145%; top: 20%; }
+.album--3 .album__title { left: 140%; top: 38%; }
+
+/* ---------- Footer ---------- */
+.footer {
+  position: relative; color: #fff;
+  background-size: cover; background-position: center;
+}
+.footer::before {
+  content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.55);
+}
+.footer__inner {
+  position: relative; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem;
+  max-width: 1000px; margin: 0 auto; padding: 2rem 1.25rem;
+}
+.contact {
+  list-style: none; display: grid; gap: 0.8rem 1.5rem;
+  grid-template-columns: auto auto; align-content: start; font-size: 0.85rem;
+}
+.contact__item { display: flex; align-items: center; gap: 0.6rem; }
+.contact__item--show { grid-column: 1 / -1; }
+.contact__item a:hover { text-decoration: underline; }
+.feedback { display: flex; flex-direction: column; gap: 0.4rem; }
+.feedback label { font-size: 0.85rem; }
+.feedback textarea {
+  width: 100%; resize: vertical; padding: 0.6rem;
+  background: rgba(255, 255, 255, 0.3); border: 0; color: #fff;
+  font: inherit; backdrop-filter: blur(3px);
+}
+.feedback textarea:focus { outline: 2px solid #fff; }
+.feedback button {
+  align-self: flex-start; padding: 0.35rem 1.1rem; cursor: pointer;
+  background: #fff; color: #111; border: 0; border-radius: 3px; font: inherit;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .navbar { font-size: 0.7rem; }
+  .navbar__links { gap: 0.6rem; }
+    .footer__inner { grid-template-columns: 1fr; }
+}
